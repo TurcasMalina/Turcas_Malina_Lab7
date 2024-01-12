@@ -2,11 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Turcas_Malina_Lab7.ListPage"
-             Title="ListPage">
+             Title="ListPage"
+             xmlns:local="clr-namespace:Turcas_Malina_Lab7">
     <StackLayout Margin="20">
         <Editor Placeholder="Enter the description of the shopping list"
- Text="{Binding Description}"
- HeightRequest="100" />
+        Text="{Binding Description}"
+                TextColor="Black"
+        HeightRequest="50">
+            <Editor.Behaviors>
+                <local:ValidationBehaviour />
+            </Editor.Behaviors>
+        </Editor>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -18,5 +24,15 @@
  Text="Delete"
  Clicked="OnDeleteButtonClicked"/>
         </Grid>
+        <ListView x:Name="listView"
+ Margin="20">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Detail="{Binding Description}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Add/Choose Item to buy" MaximumWidthRequest="300"
+Clicked="OnChooseButtonClicked"/>
     </StackLayout>
 </ContentPage>
